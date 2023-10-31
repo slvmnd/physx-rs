@@ -425,73 +425,6 @@ extern "C" {
         self_->deregisterErrorCallback(callback);
     }
 
-    physx_PxFoundation_Pod* phys_PxCreateFoundation(uint32_t version, physx_PxAllocatorCallback_Pod* allocator_pod, physx_PxErrorCallback_Pod* errorCallback_pod) {
-        physx::PxAllocatorCallback& allocator = reinterpret_cast<physx::PxAllocatorCallback&>(*allocator_pod);
-        physx::PxErrorCallback& errorCallback = reinterpret_cast<physx::PxErrorCallback&>(*errorCallback_pod);
-        physx::PxFoundation* return_val = PxCreateFoundation(version, allocator, errorCallback);
-        auto return_val_pod = reinterpret_cast<physx_PxFoundation_Pod*>(return_val);
-        return return_val_pod;
-    }
-
-    void phys_PxSetFoundationInstance(physx_PxFoundation_Pod* foundation_pod) {
-        physx::PxFoundation& foundation = reinterpret_cast<physx::PxFoundation&>(*foundation_pod);
-        PxSetFoundationInstance(foundation);
-    }
-
-    physx_PxFoundation_Pod* phys_PxGetFoundation() {
-        physx::PxFoundation& return_val = PxGetFoundation();
-        auto return_val_pod = reinterpret_cast<physx_PxFoundation_Pod*>(&return_val);
-        return return_val_pod;
-    }
-
-    physx_PxProfilerCallback_Pod* phys_PxGetProfilerCallback() {
-        physx::PxProfilerCallback* return_val = PxGetProfilerCallback();
-        auto return_val_pod = reinterpret_cast<physx_PxProfilerCallback_Pod*>(return_val);
-        return return_val_pod;
-    }
-
-    void phys_PxSetProfilerCallback(physx_PxProfilerCallback_Pod* profiler_pod) {
-        physx::PxProfilerCallback* profiler = reinterpret_cast<physx::PxProfilerCallback*>(profiler_pod);
-        PxSetProfilerCallback(profiler);
-    }
-
-    physx_PxAllocatorCallback_Pod* phys_PxGetAllocatorCallback() {
-        physx::PxAllocatorCallback* return_val = PxGetAllocatorCallback();
-        auto return_val_pod = reinterpret_cast<physx_PxAllocatorCallback_Pod*>(return_val);
-        return return_val_pod;
-    }
-
-    physx_PxAllocatorCallback_Pod* phys_PxGetBroadcastAllocator() {
-        physx::PxAllocatorCallback* return_val = PxGetBroadcastAllocator();
-        auto return_val_pod = reinterpret_cast<physx_PxAllocatorCallback_Pod*>(return_val);
-        return return_val_pod;
-    }
-
-    physx_PxErrorCallback_Pod* phys_PxGetErrorCallback() {
-        physx::PxErrorCallback* return_val = PxGetErrorCallback();
-        auto return_val_pod = reinterpret_cast<physx_PxErrorCallback_Pod*>(return_val);
-        return return_val_pod;
-    }
-
-    physx_PxErrorCallback_Pod* phys_PxGetBroadcastError() {
-        physx::PxErrorCallback* return_val = PxGetBroadcastError();
-        auto return_val_pod = reinterpret_cast<physx_PxErrorCallback_Pod*>(return_val);
-        return return_val_pod;
-    }
-
-    uint32_t phys_PxGetWarnOnceTimeStamp() {
-        uint32_t return_val = PxGetWarnOnceTimeStamp();
-        return return_val;
-    }
-
-    void phys_PxDecFoundationRefCount() {
-        PxDecFoundationRefCount();
-    }
-
-    void phys_PxIncFoundationRefCount() {
-        PxIncFoundationRefCount();
-    }
-
     physx_PxAllocator_Pod PxAllocator_new(char const* anon_param0) {
         PxAllocator return_val(anon_param0);
         physx_PxAllocator_Pod return_val_pod;
@@ -3002,12 +2935,6 @@ extern "C" {
         self_->release();
     }
 
-    physx_PxCollection_Pod* phys_PxCreateCollection() {
-        physx::PxCollection* return_val = PxCreateCollection();
-        auto return_val_pod = reinterpret_cast<physx_PxCollection_Pod*>(return_val);
-        return return_val_pod;
-    }
-
     void PxBase_release_mut(physx_PxBase_Pod* self__pod) {
         physx::PxBase* self_ = reinterpret_cast<physx::PxBase*>(self__pod);
         self_->release();
@@ -3878,11 +3805,6 @@ extern "C" {
         physx_PxGeomIndexPair_Pod return_val_pod;
         memcpy(&return_val_pod, &return_val, sizeof(return_val_pod));
         return return_val_pod;
-    }
-
-    uint32_t phys_PxCustomGeometry_getUniqueID() {
-        uint32_t return_val = PxCustomGeometry_getUniqueID();
-        return return_val;
     }
 
     physx_PxCustomGeometryType_Pod PxCustomGeometryType_new() {
@@ -7819,22 +7741,6 @@ extern "C" {
         return return_val_pod;
     }
 
-    physx_PxPhysics_Pod* phys_PxCreatePhysics(uint32_t version, physx_PxFoundation_Pod* foundation_pod, physx_PxTolerancesScale_Pod const* scale_pod, bool trackOutstandingAllocations, physx_PxPvd_Pod* pvd_pod, physx_PxOmniPvd_Pod* omniPvd_pod) {
-        physx::PxFoundation& foundation = reinterpret_cast<physx::PxFoundation&>(*foundation_pod);
-        physx::PxTolerancesScale const& scale = reinterpret_cast<physx::PxTolerancesScale const&>(*scale_pod);
-        physx::PxPvd* pvd = reinterpret_cast<physx::PxPvd*>(pvd_pod);
-        physx::PxOmniPvd* omniPvd = reinterpret_cast<physx::PxOmniPvd*>(omniPvd_pod);
-        physx::PxPhysics* return_val = PxCreatePhysics(version, foundation, scale, trackOutstandingAllocations, pvd, omniPvd);
-        auto return_val_pod = reinterpret_cast<physx_PxPhysics_Pod*>(return_val);
-        return return_val_pod;
-    }
-
-    physx_PxPhysics_Pod* phys_PxGetPhysics() {
-        physx::PxPhysics& return_val = PxGetPhysics();
-        auto return_val_pod = reinterpret_cast<physx_PxPhysics_Pod*>(&return_val);
-        return return_val_pod;
-    }
-
     physx_PxActorShape_Pod PxActorShape_new() {
         PxActorShape return_val;
         physx_PxActorShape_Pod return_val_pod;
@@ -10336,13 +10242,6 @@ extern "C" {
         self_->shiftOrigin(shift);
     }
 
-    physx_PxControllerManager_Pod* phys_PxCreateControllerManager(physx_PxScene_Pod* scene_pod, bool lockingEnabled) {
-        physx::PxScene& scene = reinterpret_cast<physx::PxScene&>(*scene_pod);
-        physx::PxControllerManager* return_val = PxCreateControllerManager(scene, lockingEnabled);
-        auto return_val_pod = reinterpret_cast<physx_PxControllerManager_Pod*>(return_val);
-        return return_val_pod;
-    }
-
     physx_PxDim3_Pod PxDim3_new() {
         PxDim3 return_val;
         physx_PxDim3_Pod return_val_pod;
@@ -10487,108 +10386,6 @@ extern "C" {
         physx_PxCookingParams_Pod return_val_pod;
         memcpy(&return_val_pod, &return_val, sizeof(return_val_pod));
         return return_val_pod;
-    }
-
-    physx_PxInsertionCallback_Pod* phys_PxGetStandaloneInsertionCallback() {
-        physx::PxInsertionCallback* return_val = PxGetStandaloneInsertionCallback();
-        auto return_val_pod = reinterpret_cast<physx_PxInsertionCallback_Pod*>(return_val);
-        return return_val_pod;
-    }
-
-    bool phys_PxCookBVH(physx_PxBVHDesc_Pod const* desc_pod, physx_PxOutputStream_Pod* stream_pod) {
-        physx::PxBVHDesc const& desc = reinterpret_cast<physx::PxBVHDesc const&>(*desc_pod);
-        physx::PxOutputStream& stream = reinterpret_cast<physx::PxOutputStream&>(*stream_pod);
-        bool return_val = PxCookBVH(desc, stream);
-        return return_val;
-    }
-
-    physx_PxBVH_Pod* phys_PxCreateBVH(physx_PxBVHDesc_Pod const* desc_pod, physx_PxInsertionCallback_Pod* insertionCallback_pod) {
-        physx::PxBVHDesc const& desc = reinterpret_cast<physx::PxBVHDesc const&>(*desc_pod);
-        physx::PxInsertionCallback& insertionCallback = reinterpret_cast<physx::PxInsertionCallback&>(*insertionCallback_pod);
-        physx::PxBVH* return_val = PxCreateBVH(desc, insertionCallback);
-        auto return_val_pod = reinterpret_cast<physx_PxBVH_Pod*>(return_val);
-        return return_val_pod;
-    }
-
-    bool phys_PxCookHeightField(physx_PxHeightFieldDesc_Pod const* desc_pod, physx_PxOutputStream_Pod* stream_pod) {
-        physx::PxHeightFieldDesc const& desc = reinterpret_cast<physx::PxHeightFieldDesc const&>(*desc_pod);
-        physx::PxOutputStream& stream = reinterpret_cast<physx::PxOutputStream&>(*stream_pod);
-        bool return_val = PxCookHeightField(desc, stream);
-        return return_val;
-    }
-
-    physx_PxHeightField_Pod* phys_PxCreateHeightField(physx_PxHeightFieldDesc_Pod const* desc_pod, physx_PxInsertionCallback_Pod* insertionCallback_pod) {
-        physx::PxHeightFieldDesc const& desc = reinterpret_cast<physx::PxHeightFieldDesc const&>(*desc_pod);
-        physx::PxInsertionCallback& insertionCallback = reinterpret_cast<physx::PxInsertionCallback&>(*insertionCallback_pod);
-        physx::PxHeightField* return_val = PxCreateHeightField(desc, insertionCallback);
-        auto return_val_pod = reinterpret_cast<physx_PxHeightField_Pod*>(return_val);
-        return return_val_pod;
-    }
-
-    bool phys_PxCookConvexMesh(physx_PxCookingParams_Pod const* params_pod, physx_PxConvexMeshDesc_Pod const* desc_pod, physx_PxOutputStream_Pod* stream_pod, int32_t* condition_pod) {
-        physx::PxCookingParams const& params = reinterpret_cast<physx::PxCookingParams const&>(*params_pod);
-        physx::PxConvexMeshDesc const& desc = reinterpret_cast<physx::PxConvexMeshDesc const&>(*desc_pod);
-        physx::PxOutputStream& stream = reinterpret_cast<physx::PxOutputStream&>(*stream_pod);
-        physx::PxConvexMeshCookingResult::Enum* condition = reinterpret_cast<physx::PxConvexMeshCookingResult::Enum*>(condition_pod);
-        bool return_val = PxCookConvexMesh(params, desc, stream, condition);
-        return return_val;
-    }
-
-    physx_PxConvexMesh_Pod* phys_PxCreateConvexMesh(physx_PxCookingParams_Pod const* params_pod, physx_PxConvexMeshDesc_Pod const* desc_pod, physx_PxInsertionCallback_Pod* insertionCallback_pod, int32_t* condition_pod) {
-        physx::PxCookingParams const& params = reinterpret_cast<physx::PxCookingParams const&>(*params_pod);
-        physx::PxConvexMeshDesc const& desc = reinterpret_cast<physx::PxConvexMeshDesc const&>(*desc_pod);
-        physx::PxInsertionCallback& insertionCallback = reinterpret_cast<physx::PxInsertionCallback&>(*insertionCallback_pod);
-        physx::PxConvexMeshCookingResult::Enum* condition = reinterpret_cast<physx::PxConvexMeshCookingResult::Enum*>(condition_pod);
-        physx::PxConvexMesh* return_val = PxCreateConvexMesh(params, desc, insertionCallback, condition);
-        auto return_val_pod = reinterpret_cast<physx_PxConvexMesh_Pod*>(return_val);
-        return return_val_pod;
-    }
-
-    bool phys_PxValidateConvexMesh(physx_PxCookingParams_Pod const* params_pod, physx_PxConvexMeshDesc_Pod const* desc_pod) {
-        physx::PxCookingParams const& params = reinterpret_cast<physx::PxCookingParams const&>(*params_pod);
-        physx::PxConvexMeshDesc const& desc = reinterpret_cast<physx::PxConvexMeshDesc const&>(*desc_pod);
-        bool return_val = PxValidateConvexMesh(params, desc);
-        return return_val;
-    }
-
-    bool phys_PxComputeHullPolygons(physx_PxCookingParams_Pod const* params_pod, physx_PxSimpleTriangleMesh_Pod const* mesh_pod, physx_PxAllocatorCallback_Pod* inCallback_pod, uint32_t* nbVerts_pod, physx_PxVec3_Pod** vertices_pod, uint32_t* nbIndices_pod, uint32_t** indices_pod, uint32_t* nbPolygons_pod, physx_PxHullPolygon_Pod** hullPolygons_pod) {
-        physx::PxCookingParams const& params = reinterpret_cast<physx::PxCookingParams const&>(*params_pod);
-        physx::PxSimpleTriangleMesh const& mesh = reinterpret_cast<physx::PxSimpleTriangleMesh const&>(*mesh_pod);
-        physx::PxAllocatorCallback& inCallback = reinterpret_cast<physx::PxAllocatorCallback&>(*inCallback_pod);
-        uint32_t& nbVerts = *nbVerts_pod;
-        physx::PxVec3*& vertices = reinterpret_cast<physx::PxVec3*&>(*vertices_pod);
-        uint32_t& nbIndices = *nbIndices_pod;
-        uint32_t*& indices = reinterpret_cast<uint32_t*&>(*indices_pod);
-        uint32_t& nbPolygons = *nbPolygons_pod;
-        physx::PxHullPolygon*& hullPolygons = reinterpret_cast<physx::PxHullPolygon*&>(*hullPolygons_pod);
-        bool return_val = PxComputeHullPolygons(params, mesh, inCallback, nbVerts, vertices, nbIndices, indices, nbPolygons, hullPolygons);
-        return return_val;
-    }
-
-    bool phys_PxValidateTriangleMesh(physx_PxCookingParams_Pod const* params_pod, physx_PxTriangleMeshDesc_Pod const* desc_pod) {
-        physx::PxCookingParams const& params = reinterpret_cast<physx::PxCookingParams const&>(*params_pod);
-        physx::PxTriangleMeshDesc const& desc = reinterpret_cast<physx::PxTriangleMeshDesc const&>(*desc_pod);
-        bool return_val = PxValidateTriangleMesh(params, desc);
-        return return_val;
-    }
-
-    physx_PxTriangleMesh_Pod* phys_PxCreateTriangleMesh(physx_PxCookingParams_Pod const* params_pod, physx_PxTriangleMeshDesc_Pod const* desc_pod, physx_PxInsertionCallback_Pod* insertionCallback_pod, int32_t* condition_pod) {
-        physx::PxCookingParams const& params = reinterpret_cast<physx::PxCookingParams const&>(*params_pod);
-        physx::PxTriangleMeshDesc const& desc = reinterpret_cast<physx::PxTriangleMeshDesc const&>(*desc_pod);
-        physx::PxInsertionCallback& insertionCallback = reinterpret_cast<physx::PxInsertionCallback&>(*insertionCallback_pod);
-        physx::PxTriangleMeshCookingResult::Enum* condition = reinterpret_cast<physx::PxTriangleMeshCookingResult::Enum*>(condition_pod);
-        physx::PxTriangleMesh* return_val = PxCreateTriangleMesh(params, desc, insertionCallback, condition);
-        auto return_val_pod = reinterpret_cast<physx_PxTriangleMesh_Pod*>(return_val);
-        return return_val_pod;
-    }
-
-    bool phys_PxCookTriangleMesh(physx_PxCookingParams_Pod const* params_pod, physx_PxTriangleMeshDesc_Pod const* desc_pod, physx_PxOutputStream_Pod* stream_pod, int32_t* condition_pod) {
-        physx::PxCookingParams const& params = reinterpret_cast<physx::PxCookingParams const&>(*params_pod);
-        physx::PxTriangleMeshDesc const& desc = reinterpret_cast<physx::PxTriangleMeshDesc const&>(*desc_pod);
-        physx::PxOutputStream& stream = reinterpret_cast<physx::PxOutputStream&>(*stream_pod);
-        physx::PxTriangleMeshCookingResult::Enum* condition = reinterpret_cast<physx::PxTriangleMeshCookingResult::Enum*>(condition_pod);
-        bool return_val = PxCookTriangleMesh(params, desc, stream, condition);
-        return return_val;
     }
 
     physx_PxDefaultMemoryOutputStream_Pod* PxDefaultMemoryOutputStream_new_alloc(physx_PxAllocatorCallback_Pod* allocator_pod) {
@@ -10912,13 +10709,6 @@ extern "C" {
         physx_PxSpring_Pod return_val_pod;
         memcpy(&return_val_pod, &return_val, sizeof(return_val_pod));
         return return_val_pod;
-    }
-
-    void phys_PxSetJointGlobalFrame(physx_PxJoint_Pod* joint_pod, physx_PxVec3_Pod const* wsAnchor_pod, physx_PxVec3_Pod const* wsAxis_pod) {
-        physx::PxJoint& joint = reinterpret_cast<physx::PxJoint&>(*joint_pod);
-        physx::PxVec3 const* wsAnchor = reinterpret_cast<physx::PxVec3 const*>(wsAnchor_pod);
-        physx::PxVec3 const* wsAxis = reinterpret_cast<physx::PxVec3 const*>(wsAxis_pod);
-        PxSetJointGlobalFrame(joint, wsAnchor, wsAxis);
     }
 
     physx_PxDistanceJoint_Pod* phys_PxDistanceJointCreate(physx_PxPhysics_Pod* physics_pod, physx_PxRigidActor_Pod* actor0_pod, physx_PxTransform_Pod const* localFrame0_pod, physx_PxRigidActor_Pod* actor1_pod, physx_PxTransform_Pod const* localFrame1_pod) {
@@ -12411,13 +12201,6 @@ extern "C" {
         return return_val_pod;
     }
 
-    bool phys_PxBuildSmoothNormals(uint32_t nbTris, uint32_t nbVerts, physx_PxVec3_Pod const* verts_pod, uint32_t const* dFaces, uint16_t const* wFaces, physx_PxVec3_Pod* normals_pod, bool flip) {
-        physx::PxVec3 const* verts = reinterpret_cast<physx::PxVec3 const*>(verts_pod);
-        physx::PxVec3* normals = reinterpret_cast<physx::PxVec3*>(normals_pod);
-        bool return_val = PxBuildSmoothNormals(nbTris, nbVerts, verts, dFaces, wFaces, normals, flip);
-        return return_val;
-    }
-
     physx_PxRigidDynamic_Pod* phys_PxCreateDynamic(physx_PxPhysics_Pod* sdk_pod, physx_PxTransform_Pod const* transform_pod, physx_PxGeometry_Pod const* geometry_pod, physx_PxMaterial_Pod* material_pod, float density, physx_PxTransform_Pod const* shapeOffset_pod) {
         physx::PxPhysics& sdk = reinterpret_cast<physx::PxPhysics&>(*sdk_pod);
         physx::PxTransform const& transform = reinterpret_cast<physx::PxTransform const&>(*transform_pod);
@@ -12840,17 +12623,6 @@ extern "C" {
         physx::PxVec4& bary = reinterpret_cast<physx::PxVec4&>(*bary_pod);
         int32_t return_val = PxTetrahedronMeshExt::findTetrahedronClosestToPoint(mesh, point, bary);
         return return_val;
-    }
-
-    bool phys_PxInitExtensions(physx_PxPhysics_Pod* physics_pod, physx_PxPvd_Pod* pvd_pod) {
-        physx::PxPhysics& physics = reinterpret_cast<physx::PxPhysics&>(*physics_pod);
-        physx::PxPvd* pvd = reinterpret_cast<physx::PxPvd*>(pvd_pod);
-        bool return_val = PxInitExtensions(physics, pvd);
-        return return_val;
-    }
-
-    void phys_PxCloseExtensions() {
-        PxCloseExtensions();
     }
 
     physx_PxRepXObject_Pod PxRepXObject_new(char const* inTypeName, void const* inSerializable, uint64_t inId) {

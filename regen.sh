@@ -16,7 +16,7 @@ RUST_LOG=debug cargo +nightly run --release -p pxbind
 out=$(mktemp -d)
 
 # Compile and run structgen for linux
-clang++ -std=c++14 -fuse-ld=lld -w -o "$out/structgen" \
+clang++ -std=c++14 -w -o "$out/structgen" \
     -DPX_PHYSX_STATIC_LIB -DNDEBUG \
     -I physx-sys/physx/physx/include \
     physx-sys/src/structgen/structgen.cpp

@@ -7,7 +7,7 @@ publish = false
 
 [dependencies]
 anyhow = "1.0"
-clang-ast = "0.1"
+clang-ast = { version = "0.1", path = "/Users/slvmnd/code/rs/clang-ast" }
 env_logger = "0.10"
 heck = "0.4"
 log = "0.4"

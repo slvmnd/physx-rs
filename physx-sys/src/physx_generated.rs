@@ -4041,46 +4041,6 @@ extern "C" {
 
     pub fn PxFoundation_deregisterErrorCallback_mut(self_: *mut PxFoundation, callback: *mut PxErrorCallback);
 
-    /// Creates an instance of the foundation class
-    ///
-    /// The foundation class is needed to initialize higher level SDKs. There may be only one instance per process.
-    /// Calling this method after an instance has been created already will result in an error message and NULL will be
-    /// returned.
-    ///
-    /// Foundation instance on success, NULL if operation failed
-    pub fn phys_PxCreateFoundation(version: u32, allocator: *mut PxAllocatorCallback, errorCallback: *mut PxErrorCallback) -> *mut PxFoundation;
-
-    pub fn phys_PxSetFoundationInstance(foundation: *mut PxFoundation);
-
-    pub fn phys_PxGetFoundation() -> *mut PxFoundation;
-
-    /// Get the callback that will be used for all profiling.
-    pub fn phys_PxGetProfilerCallback() -> *mut PxProfilerCallback;
-
-    /// Set the callback that will be used for all profiling.
-    pub fn phys_PxSetProfilerCallback(profiler: *mut PxProfilerCallback);
-
-    /// Get the allocator callback
-    pub fn phys_PxGetAllocatorCallback() -> *mut PxAllocatorCallback;
-
-    /// Get the broadcasting allocator callback
-    pub fn phys_PxGetBroadcastAllocator() -> *mut PxAllocatorCallback;
-
-    /// Get the error callback
-    pub fn phys_PxGetErrorCallback() -> *mut PxErrorCallback;
-
-    /// Get the broadcasting error callback
-    pub fn phys_PxGetBroadcastError() -> *mut PxErrorCallback;
-
-    /// Get the warn once timestamp
-    pub fn phys_PxGetWarnOnceTimeStamp() -> u32;
-
-    /// Decrement the ref count of PxFoundation
-    pub fn phys_PxDecFoundationRefCount();
-
-    /// Increment the ref count of PxFoundation
-    pub fn phys_PxIncFoundationRefCount();
-
     pub fn PxAllocator_new(anon_param0: *const std::ffi::c_char) -> PxAllocator;
 
     pub fn PxAllocator_allocate_mut(self_: *mut PxAllocator, size: usize, file: *const std::ffi::c_char, line: i32) -> *mut std::ffi::c_void;
@@ -4099,6 +4059,8 @@ extern "C" {
 
     pub fn PxVirtualAllocatorCallback_deallocate_mut(self_: *mut PxVirtualAllocatorCallback, ptr: *mut std::ffi::c_void);
 
+    ///
+    /// group = 0
     pub fn PxVirtualAllocator_new(callback: *mut PxVirtualAllocatorCallback, group: i32) -> PxVirtualAllocator;
 
     pub fn PxVirtualAllocator_allocate_mut(self_: *mut PxVirtualAllocator, size: usize, file: *const std::ffi::c_char, line: i32) -> *mut std::ffi::c_void;
@@ -4861,6 +4823,8 @@ extern "C" {
 
     pub fn Interpolation_PxSDFSampleImpl(sdf: *const f32, localPos: *const PxVec3, sdfBoxLower: *const PxVec3, sdfBoxHigher: *const PxVec3, sdfDx: f32, invSdfDx: f32, dimX: u32, dimY: u32, dimZ: u32, tolerance: f32) -> f32;
 
+    ///
+    /// tolerance = 3.40282347E+38
     pub fn phys_PxSdfSample(sdf: *const f32, localPos: *const PxVec3, sdfBoxLower: *const PxVec3, sdfBoxHigher: *const PxVec3, sdfDx: f32, invSdfDx: f32, dimX: u32, dimY: u32, dimZ: u32, gradient: *mut PxVec3, tolerance: f32) -> f32;
 
     /// The constructor for Mutex creates a mutex. It is initially unlocked.
@@ -5264,15 +5228,6 @@ extern "C" {
     /// that are part of the collection.
     pub fn PxCollection_release_mut(self_: *mut PxCollection);
 
-    /// Creates a collection object.
-    ///
-    /// Objects can only be serialized or deserialized through a collection.
-    /// For serialization, users must add objects to the collection and serialize the collection as a whole.
-    /// For deserialization, the system gives back a collection of deserialized objects to users.
-    ///
-    /// The new collection object.
-    pub fn phys_PxCreateCollection() -> *mut PxCollection;
-
     /// Releases the PxBase instance, please check documentation of release in derived class.
     pub fn PxBase_release_mut(self_: *mut PxBase);
 
@@ -5321,6 +5276,9 @@ extern "C" {
     pub fn PxRefCounted_acquireReference_mut(self_: *mut PxRefCounted);
 
     /// constructor sets to default
+    ///
+    /// defaultLength = 1
+    /// defaultSpeed = 10
     pub fn PxTolerancesScale_new(defaultLength: f32, defaultSpeed: f32) -> PxTolerancesScale;
 
     /// Returns true if the descriptor is valid.
@@ -5550,6 +5508,10 @@ extern "C" {
     pub fn PxGeometry_getType(self_: *const PxGeometry) -> PxGeometryType;
 
     /// Constructor to initialize half extents from scalar parameters.
+    ///
+    /// hx = 0
+    /// hy = 0
+    /// hz = 0
     pub fn PxBoxGeometry_new(hx: f32, hy: f32, hz: f32) -> PxBoxGeometry;
 
     /// Constructor to initialize half extents from vector parameter.
@@ -5669,6 +5631,9 @@ extern "C" {
     pub fn PxBVH_getConcreteTypeName(self_: *const PxBVH) -> *const std::ffi::c_char;
 
     /// Constructor, initializes to a capsule with passed radius and half height.
+    ///
+    /// radius_ = 0
+    /// halfHeight_ = 0
     pub fn PxCapsuleGeometry_new(radius_: f32, halfHeight_: f32) -> PxCapsuleGeometry;
 
     /// Returns true if the geometry is valid.
@@ -5780,6 +5745,8 @@ extern "C" {
     pub fn PxConvexMeshGeometry_isValid(self_: *const PxConvexMeshGeometry) -> bool;
 
     /// Constructor.
+    ///
+    /// ir = 0
     pub fn PxSphereGeometry_new(ir: f32) -> PxSphereGeometry;
 
     /// Returns true if the geometry is valid.
@@ -5810,6 +5777,10 @@ extern "C" {
     pub fn PxTriangleMeshGeometry_isValid(self_: *const PxTriangleMeshGeometry) -> bool;
 
     /// Constructor.
+    ///
+    /// heightScale_ = 1
+    /// rowScale_ = 1
+    /// columnScale_ = 1
     pub fn PxHeightFieldGeometry_new(hf: *mut PxHeightField, flags: PxMeshGeometryFlags, heightScale_: f32, rowScale_: f32, columnScale_: f32) -> PxHeightFieldGeometry;
 
     /// Returns true if the geometry is valid.
@@ -5867,9 +5838,6 @@ extern "C" {
     pub fn PxGeomIndexPair_new() -> PxGeomIndexPair;
 
     pub fn PxGeomIndexPair_new_1(_id0: u32, _id1: u32) -> PxGeomIndexPair;
-
-    /// For internal use
-    pub fn phys_PxCustomGeometry_getUniqueID() -> u32;
 
     /// Default constructor
     pub fn PxCustomGeometryType_new() -> PxCustomGeometryType;
@@ -6019,6 +5987,8 @@ extern "C" {
     /// PxConvexMeshGeometry vs. {PxSphereGeometry, PxPlaneGeometry, PxCapsuleGeometry, PxBoxGeometry, PxConvexMeshGeometry, PxTriangleMeshGeometry, PxHeightFieldGeometry}
     ///
     /// True if the swept geometry object geom0 hits the object geom1
+    ///
+    /// inflation = 0
     pub fn PxGeometryQuery_sweep(unitDir: *const PxVec3, maxDist: f32, geom0: *const PxGeometry, pose0: *const PxTransform, geom1: *const PxGeometry, pose1: *const PxTransform, sweepHit: *mut PxGeomSweepHit, hitFlags: PxHitFlags, inflation: f32, queryFlags: PxGeometryQueryFlags, threadContext: *mut PxQueryThreadContext) -> bool;
 
     /// Compute minimum translational distance (MTD) between two geometry objects.
@@ -6054,6 +6024,9 @@ extern "C" {
     pub fn PxGeometryQuery_pointDistance(point: *const PxVec3, geom: *const PxGeometry, pose: *const PxTransform, closestPoint: *mut PxVec3, closestIndex: *mut u32, queryFlags: PxGeometryQueryFlags) -> f32;
 
     /// computes the bounds for a geometry object
+    ///
+    /// offset = 0
+    /// inflation = 1
     pub fn PxGeometryQuery_computeGeomBounds(bounds: *mut PxBounds3, geom: *const PxGeometry, pose: *const PxTransform, offset: f32, inflation: f32, queryFlags: PxGeometryQueryFlags);
 
     /// Checks if provided geometry is valid.
@@ -6090,6 +6063,8 @@ extern "C" {
     /// PhysX does not keep a mapping from the heightfield to heightfield shapes that reference it.
     /// Call PxShape::setGeometry on each shape which references the height field, to ensure that internal data structures are updated to reflect the new geometry.
     /// Please note that PxShape::setGeometry does not guarantee correct/continuous behavior when objects are resting on top of old or new geometry.
+    ///
+    /// shrinkBounds = false
     pub fn PxHeightField_modifySamples_mut(self_: *mut PxHeightField, startCol: i32, startRow: i32, subfieldDesc: *const PxHeightFieldDesc, shrinkBounds: bool) -> bool;
 
     /// Retrieves the number of sample rows in the samples array.
@@ -6241,6 +6216,9 @@ extern "C" {
     /// The returned PxGeomSweepHit::faceIndex parameter will hold the index of the hit triangle in input array, i.e. the range is [0; triangleCount). For initially overlapping sweeps, this is the index of overlapping triangle.
     ///
     /// The inflation parameter is not compatible with PxHitFlag::ePRECISE_SWEEP.
+    ///
+    /// inflation = 0
+    /// doubleSided = false
     pub fn PxMeshQuery_sweep(unitDir: *const PxVec3, distance: f32, geom: *const PxGeometry, pose: *const PxTransform, triangleCount: u32, triangles: *const PxTriangle, sweepHit: *mut PxGeomSweepHit, hitFlags: PxHitFlags, cachedIndex: *const u32, inflation: f32, doubleSided: bool, queryFlags: PxGeometryQueryFlags) -> bool;
 
     /// constructor sets to default.
@@ -6553,6 +6531,8 @@ extern "C" {
     /// in PxContactModifyCallback or in contact report callbacks).
     ///
     /// The actor's bounding box.
+    ///
+    /// inflation = 1.01
     pub fn PxActor_getWorldBounds(self_: *const PxActor, inflation: f32) -> PxBounds3;
 
     /// Raises or clears a particular actor flag.
@@ -6940,6 +6920,8 @@ extern "C" {
     ///
     /// An offset defines an amount to be added to the accumulated length computed for the tendon. It allows the
     /// application to actuate the tendon by shortening or lengthening it.
+    ///
+    /// autowake = true
     pub fn PxArticulationTendon_setOffset_mut(self_: *mut PxArticulationTendon, offset: f32, autowake: bool);
 
     /// Gets the length offset term for the tendon.
@@ -7310,6 +7292,8 @@ extern "C" {
     ///
     /// It is not allowed to use this method while the simulation is running, except in a split simulation
     /// during [`PxScene::collide`]() and up to #PxScene::advance(), and in PxContactModifyCallback or in contact report callbacks.
+    ///
+    /// inflation = 1.01
     pub fn PxArticulationReducedCoordinate_getWorldBounds(self_: *const PxArticulationReducedCoordinate, inflation: f32) -> PxBounds3;
 
     /// Returns the aggregate the articulation might be a part of.
@@ -7373,6 +7357,8 @@ extern "C" {
     /// - a nonzero root velocity is applied
     ///
     /// This call may only be made on articulations that are in a scene, and may not be made during simulation.
+    ///
+    /// autowake = true
     pub fn PxArticulationReducedCoordinate_applyCache_mut(self_: *mut PxArticulationReducedCoordinate, cache: *mut PxArticulationCache, flags: PxArticulationCacheFlags, autowake: bool);
 
     /// Copies internal data of the articulation to the cache.
@@ -7541,6 +7527,8 @@ extern "C" {
     /// in order to update link states for the next simulation frame or querying.
     ///
     /// This call may not be made during simulation.
+    ///
+    /// autowake = true
     pub fn PxArticulationReducedCoordinate_setRootGlobalPose_mut(self_: *mut PxArticulationReducedCoordinate, pose: *const PxTransform, autowake: bool);
 
     /// Returns the root link transform (world to actor frame).
@@ -7562,6 +7550,8 @@ extern "C" {
     /// in order to update link states for the next simulation frame or querying.
     ///
     /// This call may not be made during simulation, except in a split simulation in-between [`PxScene::fetchCollision`] and #PxScene::advance.
+    ///
+    /// autowake = true
     pub fn PxArticulationReducedCoordinate_setRootLinearVelocity_mut(self_: *mut PxArticulationReducedCoordinate, linearVelocity: *const PxVec3, autowake: bool);
 
     /// Gets the root link center-of-mass linear velocity.
@@ -7583,6 +7573,8 @@ extern "C" {
     /// in order to update link states for the next simulation frame or querying.
     ///
     /// This call may not be made during simulation, except in a split simulation in-between [`PxScene::fetchCollision`] and #PxScene::advance.
+    ///
+    /// autowake = true
     pub fn PxArticulationReducedCoordinate_setRootAngularVelocity_mut(self_: *mut PxArticulationReducedCoordinate, angularVelocity: *const PxVec3, autowake: bool);
 
     /// Gets the root link angular velocity.
@@ -7782,6 +7774,8 @@ extern "C" {
     /// The target is specified in the parent frame of the joint. If Gp, Gc are the parent and child actor poses in the world frame and Lp, Lc are the parent and child joint frames expressed in the parent and child actor frames then the joint will drive the parent and child links to poses that obey Gp * Lp * J = Gc * Lc. For joints restricted to angular motion, J has the form PxTranfsorm(PxVec3(PxZero), PxExp(PxVec3(twistTarget, swing1Target, swing2Target))).  For joints restricted to linear motion, J has the form PxTransform(PxVec3(XTarget, YTarget, ZTarget), PxQuat(PxIdentity)).
     ///
     /// For spherical joints with more than 1 degree of freedom, the joint target angles taken together can collectively represent a rotation of greater than Pi around a vector. When this happens the rotation that matches the joint drive target is not the shortest path rotation.  The joint pose J that is the outcome after driving to the target pose will always be the equivalent of the shortest path rotation.
+    ///
+    /// autowake = true
     pub fn PxArticulationJointReducedCoordinate_setDriveTarget_mut(self_: *mut PxArticulationJointReducedCoordinate, axis: PxArticulationAxis, target: f32, autowake: bool);
 
     /// Returns the joint drive position target for the given axis.
@@ -7794,6 +7788,8 @@ extern "C" {
     /// The target units are linear units (equivalent to scene units) per second for a translational axis, or radians per second for a rotational axis.
     ///
     /// This call is not allowed while the simulation is running.
+    ///
+    /// autowake = true
     pub fn PxArticulationJointReducedCoordinate_setDriveVelocity_mut(self_: *mut PxArticulationJointReducedCoordinate, axis: PxArticulationAxis, targetVel: f32, autowake: bool);
 
     /// Returns the joint drive velocity target for the given axis.
@@ -8198,6 +8194,8 @@ extern "C" {
     ///
     /// Sleeping:
     /// This call wakes dynamic actors if they are sleeping and the autowake parameter is true (default).
+    ///
+    /// autowake = true
     pub fn PxRigidActor_setGlobalPose_mut(self_: *mut PxRigidActor, pose: *const PxTransform, autowake: bool);
 
     /// Attach a shape to an actor
@@ -8227,6 +8225,8 @@ extern "C" {
     /// Does
     /// NOT
     /// wake the actor up automatically.
+    ///
+    /// wakeOnLostTouch = true
     pub fn PxRigidActor_detachShape_mut(self_: *mut PxRigidActor, shape: *mut PxShape, wakeOnLostTouch: bool);
 
     /// Returns the number of shapes assigned to the actor.
@@ -8265,6 +8265,8 @@ extern "C" {
 
     pub fn PxNodeIndex_new(id: u32, articLinkId: u32) -> PxNodeIndex;
 
+    ///
+    /// id = 4294967295
     pub fn PxNodeIndex_new_1(id: u32) -> PxNodeIndex;
 
     pub fn PxNodeIndex_index(self_: *const PxNodeIndex) -> u32;
@@ -8479,6 +8481,8 @@ extern "C" {
     ///
     /// Sleeping:
     /// This call wakes the actor if it is sleeping, and the autowake parameter is true (default) or the force is non-zero.
+    ///
+    /// autowake = true
     pub fn PxRigidBody_addForce_mut(self_: *mut PxRigidBody, force: *const PxVec3, mode: PxForceMode, autowake: bool);
 
     /// Applies an impulsive torque defined in the global coordinate frame to the actor.
@@ -8501,6 +8505,8 @@ extern "C" {
     ///
     /// Sleeping:
     /// This call wakes the actor if it is sleeping, and the autowake parameter is true (default) or the torque is non-zero.
+    ///
+    /// autowake = true
     pub fn PxRigidBody_addTorque_mut(self_: *mut PxRigidBody, torque: *const PxVec3, mode: PxForceMode, autowake: bool);
 
     /// Clears the accumulated forces (sets the accumulated force back to zero).
@@ -9582,6 +9588,8 @@ extern "C" {
     /// The shape
     ///
     /// Shared shapes are not mutable when they are attached to an actor
+    ///
+    /// isExclusive = false
     pub fn PxPhysics_createShape_mut(self_: *mut PxPhysics, geometry: *const PxGeometry, material: *const PxMaterial, isExclusive: bool, shapeFlags: PxShapeFlags) -> *mut PxShape;
 
     /// Creates a shape which may be attached to multiple actors
@@ -9593,6 +9601,8 @@ extern "C" {
     /// Shared shapes are not mutable when they are attached to an actor
     ///
     /// Shapes created from *SDF* triangle-mesh geometries do not support more than one material.
+    ///
+    /// isExclusive = false
     pub fn PxPhysics_createShape_mut_1(self_: *mut PxPhysics, geometry: *const PxGeometry, materials: *const *mut PxMaterial, materialCount: u16, isExclusive: bool, shapeFlags: PxShapeFlags) -> *mut PxShape;
 
     /// Return the number of shapes that currently exist.
@@ -9648,6 +9658,8 @@ extern "C" {
     /// By default a registered listener will receive events from all objects. Set the restrictedObjectSet parameter to true on registration and use [`registerDeletionListenerObjects`] to restrict the received events to specific objects.
     ///
     /// The deletion events are only supported on core PhysX objects. In general, objects in extension modules do not provide this functionality, however, in the case of PxJoint objects, the underlying PxConstraint will send the events.
+    ///
+    /// restrictedObjectSet = false
     pub fn PxPhysics_registerDeletionListener_mut(self_: *mut PxPhysics, observer: *mut PxDeletionListener, deletionEvents: *const PxDeletionEventFlags, restrictedObjectSet: bool);
 
     /// Unregister a deletion listener.
@@ -9677,22 +9689,6 @@ extern "C" {
     ///
     /// The insertion interface is needed for PxCreateTriangleMesh, PxCooking::createTriangleMesh etc., this allows runtime mesh creation.
     pub fn PxPhysics_getPhysicsInsertionCallback_mut(self_: *mut PxPhysics) -> *mut PxInsertionCallback;
-
-    /// Creates an instance of the physics SDK.
-    ///
-    /// Creates an instance of this class. May not be a class member to avoid name mangling.
-    /// Pass the constant [`PX_PHYSICS_VERSION`] as the argument.
-    /// There may be only one instance of this class per process. Calling this method after an instance
-    /// has been created already will result in an error message and NULL will be returned.
-    ///
-    /// Calling this will register all optional code modules (Articulations and HeightFields), preparing them for use.
-    /// If you do not need some of these modules, consider calling PxCreateBasePhysics() instead and registering needed
-    /// modules manually.
-    ///
-    /// PxPhysics instance on success, NULL if operation failed
-    pub fn phys_PxCreatePhysics(version: u32, foundation: *mut PxFoundation, scale: *const PxTolerancesScale, trackOutstandingAllocations: bool, pvd: *mut PxPvd, omniPvd: *mut PxOmniPvd) -> *mut PxPhysics;
-
-    pub fn phys_PxGetPhysics() -> *mut PxPhysics;
 
     pub fn PxActorShape_new() -> PxActorShape;
 
@@ -9859,6 +9855,8 @@ extern "C" {
     /// new velocity is non-zero.
     ///
     /// It is invalid to use this method if PxActorFlag::eDISABLE_SIMULATION is set.
+    ///
+    /// autowake = true
     pub fn PxRigidDynamic_setLinearVelocity_mut(self_: *mut PxRigidDynamic, linVel: *const PxVec3, autowake: bool);
 
     /// Retrieves the angular velocity of the actor.
@@ -9882,6 +9880,8 @@ extern "C" {
     /// new velocity is non-zero.
     ///
     /// It is invalid to use this method if PxActorFlag::eDISABLE_SIMULATION is set.
+    ///
+    /// autowake = true
     pub fn PxRigidDynamic_setAngularVelocity_mut(self_: *mut PxRigidDynamic, angVel: *const PxVec3, autowake: bool);
 
     /// Sets the wake counter for the actor.
@@ -10046,6 +10046,8 @@ extern "C" {
     /// the hit is returned unless eASSUME_NO_INITIAL_OVERLAP was specified.
     ///
     /// True if any touching or blocking hits were found or any hit was found in case PxQueryFlag::eANY_HIT was specified.
+    ///
+    /// inflation = 0
     pub fn PxSceneQuerySystemBase_sweep(self_: *const PxSceneQuerySystemBase, geometry: *const PxGeometry, pose: *const PxTransform, unitDir: *const PxVec3, distance: f32, hitCall: *mut PxSweepCallback, hitFlags: PxHitFlags, filterData: *const PxQueryFilterData, filterCall: *mut PxQueryFilterCallback, cache: *const PxQueryCache, inflation: f32, queryFlags: PxGeometryQueryFlags) -> bool;
 
     /// Performs an overlap test of a given geometry against objects in the scene, returns results in a PxOverlapBuffer object
@@ -10107,6 +10109,8 @@ extern "C" {
     ///
     /// If PxSceneQueryUpdateMode::eBUILD_DISABLED_COMMIT_DISABLED is used, it is required to update the scene queries
     /// using this function.
+    ///
+    /// controlSimulation = true
     pub fn PxSceneSQSystem_sceneQueriesUpdate_mut(self_: *mut PxSceneSQSystem, completionTask: *mut PxBaseTask, controlSimulation: bool);
 
     /// This checks to see if the scene queries update has completed.
@@ -10115,12 +10119,16 @@ extern "C" {
     /// The bool will allow it to either return immediately or block waiting for the condition to be met so that it can return true
     ///
     /// True if the results are available.
+    ///
+    /// block = false
     pub fn PxSceneSQSystem_checkQueries_mut(self_: *mut PxSceneSQSystem, block: bool) -> bool;
 
     /// This method must be called after sceneQueriesUpdate. It will wait for the scene queries update to finish. If the user makes an illegal scene queries update call,
     /// the SDK will issue an error message.
     ///
     /// If a new AABB tree build finished, then during fetchQueries the current tree within the pruning structure is swapped with the new tree.
+    ///
+    /// block = false
     pub fn PxSceneSQSystem_fetchQueries_mut(self_: *mut PxSceneSQSystem, block: bool) -> bool;
 
     /// Decrements the reference count of the object and releases it if the new reference count is zero.
@@ -10147,6 +10155,8 @@ extern "C" {
     /// Adds a shape to the SQ system.
     ///
     /// The same function is used to add either a regular shape, or a SQ compound shape.
+    ///
+    /// hasPruningStructure = false
     pub fn PxSceneQuerySystem_addSQShape_mut(self_: *mut PxSceneQuerySystem, actor: *const PxRigidActor, shape: *const PxShape, bounds: *const PxBounds3, transform: *const PxTransform, compoundHandle: *const u32, hasPruningStructure: bool);
 
     /// Removes a shape from the SQ system.
@@ -10429,6 +10439,8 @@ extern "C" {
     /// Objects' indices are externally managed, i.e. they must be provided by users (as opposed to handles
     /// that could be returned by this manager). The design allows users to identify an object by a single ID,
     /// and use the same ID in multiple sub-systems.
+    ///
+    /// distance = 0
     pub fn PxAABBManager_addObject_mut(self_: *mut PxAABBManager, index: u32, bounds: *const PxBounds3, group: u32, distance: f32);
 
     /// Removes an object from the manager.
@@ -10608,6 +10620,8 @@ extern "C" {
     /// If the articulation is not part of this scene (see [`PxArticulationReducedCoordinate::getScene`]), the call is ignored and an error is issued.
     ///
     /// If the articulation is in an aggregate it will be removed from the aggregate.
+    ///
+    /// wakeOnLostTouch = true
     pub fn PxScene_removeArticulation_mut(self_: *mut PxScene, articulation: *mut PxArticulationReducedCoordinate, wakeOnLostTouch: bool);
 
     /// Adds an actor to this scene.
@@ -10675,6 +10689,8 @@ extern "C" {
     /// If the actor is a PxRigidActor then all assigned PxConstraint objects will get removed from the scene automatically.
     ///
     /// If the actor is in an aggregate it will be removed from the aggregate.
+    ///
+    /// wakeOnLostTouch = true
     pub fn PxScene_removeActor_mut(self_: *mut PxScene, actor: *mut PxActor, wakeOnLostTouch: bool);
 
     /// Removes actors from this scene. Only supports actors of type PxRigidStatic and PxRigidDynamic.
@@ -10687,6 +10703,8 @@ extern "C" {
     /// You can not remove individual articulation links (see [`PxArticulationLink`]) from the scene. Use #removeArticulation() instead.
     ///
     /// If the actor is a PxRigidActor then all assigned PxConstraint objects will get removed from the scene automatically.
+    ///
+    /// wakeOnLostTouch = true
     pub fn PxScene_removeActors_mut(self_: *mut PxScene, actors: *const *mut PxActor, nbActors: u32, wakeOnLostTouch: bool);
 
     /// Adds an aggregate to this scene.
@@ -10705,6 +10723,8 @@ extern "C" {
     /// If the aggregate is not part of this scene (see [`PxAggregate::getScene`]), the call is ignored and an error is issued.
     ///
     /// If the aggregate contains actors, those actors are removed from the scene as well.
+    ///
+    /// wakeOnLostTouch = true
     pub fn PxScene_removeAggregate_mut(self_: *mut PxScene, aggregate: *mut PxAggregate, wakeOnLostTouch: bool);
 
     /// Adds objects in the collection to this scene.
@@ -10966,6 +10986,8 @@ extern "C" {
     /// ...now results of run may be retrieved.
     ///
     /// True if success
+    ///
+    /// controlSimulation = true
     pub fn PxScene_simulate_mut(self_: *mut PxScene, elapsedTime: f32, completionTask: *mut PxBaseTask, scratchMemBlock: *mut std::ffi::c_void, scratchMemBlockSize: u32, controlSimulation: bool) -> bool;
 
     /// Performs dynamics phase of the simulation pipeline.
@@ -10980,6 +11002,8 @@ extern "C" {
     /// Calls to collide() should be the first method called to simulate a frame.
     ///
     /// True if success
+    ///
+    /// controlSimulation = true
     pub fn PxScene_collide_mut(self_: *mut PxScene, elapsedTime: f32, completionTask: *mut PxBaseTask, scratchMemBlock: *mut std::ffi::c_void, scratchMemBlockSize: u32, controlSimulation: bool) -> bool;
 
     /// This checks to see if the simulation run has completed.
@@ -10988,15 +11012,21 @@ extern "C" {
     /// The bool will allow it to either return immediately or block waiting for the condition to be met so that it can return true
     ///
     /// True if the results are available.
+    ///
+    /// block = false
     pub fn PxScene_checkResults_mut(self_: *mut PxScene, block: bool) -> bool;
 
     /// This method must be called after collide() and before advance(). It will wait for the collision phase to finish. If the user makes an illegal simulation call, the SDK will issue an error
     /// message.
+    ///
+    /// block = false
     pub fn PxScene_fetchCollision_mut(self_: *mut PxScene, block: bool) -> bool;
 
     /// This is the big brother to checkResults() it basically does the following:
     ///
     /// True if the results have been fetched.
+    ///
+    /// block = false
     pub fn PxScene_fetchResults_mut(self_: *mut PxScene, block: bool, errorState: *mut u32) -> bool;
 
     /// This call performs the first section of fetchResults, and returns a pointer to the contact streams output by the simulation. It can be used to process contact pairs in parallel, which is often a limiting factor
@@ -11006,6 +11036,8 @@ extern "C" {
     /// permitted between the start of fetchResultsStart() and the end of fetchResultsFinish().
     ///
     /// True if the results have been fetched.
+    ///
+    /// block = false
     pub fn PxScene_fetchResultsStart_mut(self_: *mut PxScene, contactPairs: *mut *const PxContactPairHeader, nbContactPairs: *mut u32, block: bool) -> bool;
 
     /// This call processes all event callbacks in parallel. It takes a continuation task, which will be executed once all callbacks have been processed.
@@ -11030,6 +11062,8 @@ extern "C" {
     /// the physics data gets streamed in and a checkpoint with a clean state should be created.
     ///
     /// It is not allowed to call this method while the simulation is running. The call will fail.
+    ///
+    /// sendPendingReports = false
     pub fn PxScene_flushSimulation_mut(self_: *mut PxScene, sendPendingReports: bool);
 
     /// Sets a constant gravity for the entire scene.
@@ -11199,6 +11233,8 @@ extern "C" {
     /// error message is generated.
     ///
     /// Handle for newly created region, or 0xffffffff in case of failure.
+    ///
+    /// populateRegion = false
     pub fn PxScene_addBroadPhaseRegion_mut(self_: *mut PxScene, region: *const PxBroadPhaseRegion, populateRegion: bool) -> u32;
 
     /// Removes a new broad-phase region.
@@ -12087,19 +12123,6 @@ extern "C" {
     /// This call will not automatically shift the PhysX scene and its objects. You need to call PxScene::shiftOrigin() seperately to keep the systems in sync.
     pub fn PxControllerManager_shiftOrigin_mut(self_: *mut PxControllerManager, shift: *const PxVec3);
 
-    /// Creates the controller manager.
-    ///
-    /// The character controller is informed by [`PxDeletionListener::onRelease`]() when actors or shapes are released, and updates its internal
-    /// caches accordingly. If character controller movement or a call to [`PxControllerManager::shiftOrigin`]() may overlap with actor/shape releases,
-    /// internal data structures must be guarded against concurrent access.
-    ///
-    /// Locking guarantees thread safety in such scenarios.
-    ///
-    /// locking may result in significant slowdown for release of actors or shapes.
-    ///
-    /// By default, locking is disabled.
-    pub fn phys_PxCreateControllerManager(scene: *mut PxScene, lockingEnabled: bool) -> *mut PxControllerManager;
-
     pub fn PxDim3_new() -> PxDim3;
 
     /// Constructor
@@ -12176,122 +12199,6 @@ extern "C" {
     pub fn PxBVHDesc_isValid(self_: *const PxBVHDesc) -> bool;
 
     pub fn PxCookingParams_new(sc: *const PxTolerancesScale) -> PxCookingParams;
-
-    pub fn phys_PxGetStandaloneInsertionCallback() -> *mut PxInsertionCallback;
-
-    /// Cooks a bounding volume hierarchy. The results are written to the stream.
-    ///
-    /// PxCookBVH() allows a BVH description to be cooked into a binary stream
-    /// suitable for loading and performing BVH detection at runtime.
-    ///
-    /// true on success.
-    pub fn phys_PxCookBVH(desc: *const PxBVHDesc, stream: *mut PxOutputStream) -> bool;
-
-    /// Cooks and creates a bounding volume hierarchy without going through a stream.
-    ///
-    /// This method does the same as cookBVH, but the produced BVH is not stored
-    /// into a stream but is either directly inserted in PxPhysics, or created as a standalone
-    /// object. Use this method if you are unable to cook offline.
-    ///
-    /// PxInsertionCallback can be obtained through PxPhysics::getPhysicsInsertionCallback()
-    /// or PxCooking::getStandaloneInsertionCallback().
-    ///
-    /// PxBVH pointer on success
-    pub fn phys_PxCreateBVH(desc: *const PxBVHDesc, insertionCallback: *mut PxInsertionCallback) -> *mut PxBVH;
-
-    /// Cooks a heightfield. The results are written to the stream.
-    ///
-    /// To create a heightfield object there is an option to precompute some of calculations done while loading the heightfield data.
-    ///
-    /// cookHeightField() allows a heightfield description to be cooked into a binary stream
-    /// suitable for loading and performing collision detection at runtime.
-    ///
-    /// true on success
-    pub fn phys_PxCookHeightField(desc: *const PxHeightFieldDesc, stream: *mut PxOutputStream) -> bool;
-
-    /// Cooks and creates a heightfield mesh and inserts it into PxPhysics.
-    ///
-    /// PxHeightField pointer on success
-    pub fn phys_PxCreateHeightField(desc: *const PxHeightFieldDesc, insertionCallback: *mut PxInsertionCallback) -> *mut PxHeightField;
-
-    /// Cooks a convex mesh. The results are written to the stream.
-    ///
-    /// To create a triangle mesh object it is necessary to first 'cook' the mesh data into
-    /// a form which allows the SDK to perform efficient collision detection.
-    ///
-    /// cookConvexMesh() allows a mesh description to be cooked into a binary stream
-    /// suitable for loading and performing collision detection at runtime.
-    ///
-    /// The number of vertices and the number of convex polygons in a cooked convex mesh is limited to 255.
-    ///
-    /// If those limits are exceeded in either the user-provided data or the final cooked mesh, an error is reported.
-    ///
-    /// true on success.
-    pub fn phys_PxCookConvexMesh(params: *const PxCookingParams, desc: *const PxConvexMeshDesc, stream: *mut PxOutputStream, condition: *mut PxConvexMeshCookingResult) -> bool;
-
-    /// Cooks and creates a convex mesh without going through a stream.
-    ///
-    /// This method does the same as cookConvexMesh, but the produced mesh is not stored
-    /// into a stream but is either directly inserted in PxPhysics, or created as a standalone
-    /// object. Use this method if you are unable to cook offline.
-    ///
-    /// PxInsertionCallback can be obtained through PxPhysics::getPhysicsInsertionCallback()
-    /// or PxCooking::getStandaloneInsertionCallback().
-    ///
-    /// PxConvexMesh pointer on success
-    pub fn phys_PxCreateConvexMesh(params: *const PxCookingParams, desc: *const PxConvexMeshDesc, insertionCallback: *mut PxInsertionCallback, condition: *mut PxConvexMeshCookingResult) -> *mut PxConvexMesh;
-
-    /// Verifies if the convex mesh is valid. Prints an error message for each inconsistency found.
-    ///
-    /// The convex mesh descriptor must contain an already created convex mesh - the vertices, indices and polygons must be provided.
-    ///
-    /// This function should be used if PxConvexFlag::eDISABLE_MESH_VALIDATION is planned to be used in release builds.
-    ///
-    /// true if all the validity conditions hold, false otherwise.
-    pub fn phys_PxValidateConvexMesh(params: *const PxCookingParams, desc: *const PxConvexMeshDesc) -> bool;
-
-    /// Computed hull polygons from given vertices and triangles. Polygons are needed for PxConvexMeshDesc rather than triangles.
-    ///
-    /// Please note that the resulting polygons may have different number of vertices. Some vertices may be removed.
-    /// The output vertices, indices and polygons must be used to construct a hull.
-    ///
-    /// The provided PxAllocatorCallback does allocate the out array's. It is the user responsibility to deallocated those
-    /// array's.
-    ///
-    /// true on success
-    pub fn phys_PxComputeHullPolygons(params: *const PxCookingParams, mesh: *const PxSimpleTriangleMesh, inCallback: *mut PxAllocatorCallback, nbVerts: *mut u32, vertices: *mut *mut PxVec3, nbIndices: *mut u32, indices: *mut *mut u32, nbPolygons: *mut u32, hullPolygons: *mut *mut PxHullPolygon) -> bool;
-
-    /// Verifies if the triangle mesh is valid. Prints an error message for each inconsistency found.
-    ///
-    /// The following conditions are true for a valid triangle mesh:
-    /// 1. There are no duplicate vertices (within specified vertexWeldTolerance. See PxCookingParams::meshWeldTolerance)
-    /// 2. There are no large triangles (within specified PxTolerancesScale.)
-    ///
-    /// true if all the validity conditions hold, false otherwise.
-    pub fn phys_PxValidateTriangleMesh(params: *const PxCookingParams, desc: *const PxTriangleMeshDesc) -> bool;
-
-    /// Cooks and creates a triangle mesh without going through a stream.
-    ///
-    /// This method does the same as cookTriangleMesh, but the produced mesh is not stored
-    /// into a stream but is either directly inserted in PxPhysics, or created as a standalone
-    /// object. Use this method if you are unable to cook offline.
-    ///
-    /// PxInsertionCallback can be obtained through PxPhysics::getPhysicsInsertionCallback()
-    /// or PxCooking::getStandaloneInsertionCallback().
-    ///
-    /// PxTriangleMesh pointer on success.
-    pub fn phys_PxCreateTriangleMesh(params: *const PxCookingParams, desc: *const PxTriangleMeshDesc, insertionCallback: *mut PxInsertionCallback, condition: *mut PxTriangleMeshCookingResult) -> *mut PxTriangleMesh;
-
-    /// Cooks a triangle mesh. The results are written to the stream.
-    ///
-    /// To create a triangle mesh object it is necessary to first 'cook' the mesh data into
-    /// a form which allows the SDK to perform efficient collision detection.
-    ///
-    /// PxCookTriangleMesh() allows a mesh description to be cooked into a binary stream
-    /// suitable for loading and performing collision detection at runtime.
-    ///
-    /// true on success
-    pub fn phys_PxCookTriangleMesh(params: *const PxCookingParams, desc: *const PxTriangleMeshDesc, stream: *mut PxOutputStream, condition: *mut PxTriangleMeshCookingResult) -> bool;
 
     pub fn PxDefaultMemoryOutputStream_new_alloc(allocator: *mut PxAllocatorCallback) -> *mut PxDefaultMemoryOutputStream;
 
@@ -12464,20 +12371,6 @@ extern "C" {
     pub fn PxJoint_getBinaryMetaData(stream: *mut PxOutputStream);
 
     pub fn PxSpring_new(stiffness_: f32, damping_: f32) -> PxSpring;
-
-    /// Helper function to setup a joint's global frame
-    ///
-    /// This replaces the following functions from previous SDK versions:
-    ///
-    /// void NxJointDesc::setGlobalAnchor(const NxVec3
-    /// &
-    /// wsAnchor);
-    /// void NxJointDesc::setGlobalAxis(const NxVec3
-    /// &
-    /// wsAxis);
-    ///
-    /// The function sets the joint's localPose using world-space input parameters.
-    pub fn phys_PxSetJointGlobalFrame(joint: *mut PxJoint, wsAnchor: *const PxVec3, wsAxis: *const PxVec3);
 
     /// Create a distance Joint.
     pub fn phys_PxDistanceJointCreate(physics: *mut PxPhysics, actor0: *mut PxRigidActor, localFrame0: *const PxTransform, actor1: *mut PxRigidActor, localFrame1: *const PxTransform) -> *mut PxDistanceJoint;
@@ -12794,6 +12687,8 @@ extern "C" {
     /// (-PX_MAX_F32, PX_MAX_F32)
     /// Default:
     /// 0.0
+    ///
+    /// autowake = true
     pub fn PxRevoluteJoint_setDriveVelocity_mut(self_: *mut PxRevoluteJoint, velocity: f32, autowake: bool);
 
     /// gets the target velocity for the drive model.
@@ -12893,6 +12788,8 @@ extern "C" {
     pub fn PxD6JointDrive_new() -> PxD6JointDrive;
 
     /// constructor a PxD6JointDrive.
+    ///
+    /// isAcceleration = false
     pub fn PxD6JointDrive_new_1(driveStiffness: f32, driveDamping: f32, driveForceLimit: f32, isAcceleration: bool) -> PxD6JointDrive;
 
     /// returns true if the drive is valid
@@ -13001,6 +12898,8 @@ extern "C" {
     ///
     /// Default
     /// the identity transform
+    ///
+    /// autowake = true
     pub fn PxD6Joint_setDrivePosition_mut(self_: *mut PxD6Joint, pose: *const PxTransform, autowake: bool);
 
     /// Get the drive goal pose.
@@ -13009,6 +12908,8 @@ extern "C" {
     /// Set the target goal velocity for drive.
     ///
     /// The velocity is measured in the constraint frame of actor[0]
+    ///
+    /// autowake = true
     pub fn PxD6Joint_setDriveVelocity_mut(self_: *mut PxD6Joint, linear: *const PxVec3, angular: *const PxVec3, autowake: bool);
 
     /// Get the target goal velocity for joint drive.
@@ -13361,6 +13262,8 @@ extern "C" {
     /// If all shapes of the actor have the same density then the overloaded method updateMassAndInertia() with a single density parameter can be used instead.
     ///
     /// Boolean. True on success else false.
+    ///
+    /// includeNonSimShapes = false
     pub fn PxRigidBodyExt_updateMassAndInertia(body: *mut PxRigidBody, shapeDensities: *const f32, shapeDensityCount: u32, massLocalPose: *const PxVec3, includeNonSimShapes: bool) -> bool;
 
     /// Computation of mass properties for a rigid body actor
@@ -13368,6 +13271,8 @@ extern "C" {
     /// See previous method for details.
     ///
     /// Boolean. True on success else false.
+    ///
+    /// includeNonSimShapes = false
     pub fn PxRigidBodyExt_updateMassAndInertia_1(body: *mut PxRigidBody, density: f32, massLocalPose: *const PxVec3, includeNonSimShapes: bool) -> bool;
 
     /// Computation of mass properties for a rigid body actor
@@ -13380,6 +13285,8 @@ extern "C" {
     /// If a single mass value should be used for the actor as a whole then the overloaded method setMassAndUpdateInertia() with a single mass parameter can be used instead.
     ///
     /// Boolean. True on success else false.
+    ///
+    /// includeNonSimShapes = false
     pub fn PxRigidBodyExt_setMassAndUpdateInertia(body: *mut PxRigidBody, shapeMasses: *const f32, shapeMassCount: u32, massLocalPose: *const PxVec3, includeNonSimShapes: bool) -> bool;
 
     /// Computation of mass properties for a rigid body actor
@@ -13390,6 +13297,8 @@ extern "C" {
     /// If no collision shapes are found, the inertia tensor is set to (1,1,1)
     ///
     /// Boolean. True on success else false.
+    ///
+    /// includeNonSimShapes = false
     pub fn PxRigidBodyExt_setMassAndUpdateInertia_1(body: *mut PxRigidBody, mass: f32, massLocalPose: *const PxVec3, includeNonSimShapes: bool) -> bool;
 
     /// Compute the mass, inertia tensor and center of mass from a list of shapes.
@@ -13413,6 +13322,8 @@ extern "C" {
     ///
     /// Sleeping:
     /// This call wakes the actor if it is sleeping and the wakeup parameter is true (default).
+    ///
+    /// wakeup = true
     pub fn PxRigidBodyExt_addForceAtPos(body: *mut PxRigidBody, force: *const PxVec3, pos: *const PxVec3, mode: PxForceMode, wakeup: bool);
 
     /// Applies a force (or impulse) defined in the global coordinate frame, acting at a particular
@@ -13431,6 +13342,8 @@ extern "C" {
     ///
     /// Sleeping:
     /// This call wakes the actor if it is sleeping and the wakeup parameter is true (default).
+    ///
+    /// wakeup = true
     pub fn PxRigidBodyExt_addForceAtLocalPos(body: *mut PxRigidBody, force: *const PxVec3, pos: *const PxVec3, mode: PxForceMode, wakeup: bool);
 
     /// Applies a force (or impulse) defined in the actor local coordinate frame, acting at a
@@ -13449,6 +13362,8 @@ extern "C" {
     ///
     /// Sleeping:
     /// This call wakes the actor if it is sleeping and the wakeup parameter is true (default).
+    ///
+    /// wakeup = true
     pub fn PxRigidBodyExt_addLocalForceAtPos(body: *mut PxRigidBody, force: *const PxVec3, pos: *const PxVec3, mode: PxForceMode, wakeup: bool);
 
     /// Applies a force (or impulse) defined in the actor local coordinate frame, acting at a
@@ -13467,6 +13382,8 @@ extern "C" {
     ///
     /// Sleeping:
     /// This call wakes the actor if it is sleeping and the wakeup parameter is true (default).
+    ///
+    /// wakeup = true
     pub fn PxRigidBodyExt_addLocalForceAtLocalPos(body: *mut PxRigidBody, force: *const PxVec3, pos: *const PxVec3, mode: PxForceMode, wakeup: bool);
 
     /// Computes the velocity of a point given in world coordinates if it were attached to the
@@ -13517,6 +13434,8 @@ extern "C" {
     /// Information about the closest intersection is written to a [`PxSweepHit`] structure.
     ///
     /// True if a blocking hit was found.
+    ///
+    /// inflation = 0
     pub fn PxRigidBodyExt_linearSweepSingle(body: *mut PxRigidBody, scene: *mut PxScene, unitDir: *const PxVec3, distance: f32, outputFlags: PxHitFlags, closestHit: *mut PxSweepHit, shapeIndex: *mut u32, filterData: *const PxQueryFilterData, filterCall: *mut PxQueryFilterCallback, cache: *const PxQueryCache, inflation: f32) -> bool;
 
     /// Performs a linear sweep through space with the body's geometry objects, returning all overlaps.
@@ -13528,6 +13447,8 @@ extern "C" {
     /// or a blocking hit is encountered.
     ///
     /// the number of touching hits. If overflow is set to true, the results are incomplete. In case of overflow there are also no guarantees that all touching hits returned are closer than the blocking hit.
+    ///
+    /// inflation = 0
     pub fn PxRigidBodyExt_linearSweepMultiple(body: *mut PxRigidBody, scene: *mut PxScene, unitDir: *const PxVec3, distance: f32, outputFlags: PxHitFlags, touchHitBuffer: *mut PxSweepHit, touchHitShapeIndices: *mut u32, touchHitBufferSize: u32, block: *mut PxSweepHit, blockingShapeIndex: *mut i32, overflow: *mut bool, filterData: *const PxQueryFilterData, filterCall: *mut PxQueryFilterCallback, cache: *const PxQueryCache, inflation: f32) -> u32;
 
     /// Retrieves the world space pose of the shape.
@@ -13555,6 +13476,8 @@ extern "C" {
     /// Retrieves the axis aligned bounding box enclosing the shape.
     ///
     /// The shape's bounding box.
+    ///
+    /// inflation = 1.01
     pub fn PxShapeExt_getWorldBounds(shape: *const PxShape, actor: *const PxRigidActor, inflation: f32) -> PxBounds3;
 
     pub fn PxMeshOverlapUtil_new_alloc() -> *mut PxMeshOverlapUtil;
@@ -13662,6 +13585,8 @@ extern "C" {
     ///
     /// Specifying followJoints will make whole jointed actor chains being added to the collection. Following chains
     /// is interrupted whenever a object in exceptFor is encountered.
+    ///
+    /// followJoints = false
     pub fn PxSerialization_complete(collection: *mut PxCollection, sr: *mut PxSerializationRegistry, exceptFor: *const PxCollection, followJoints: bool);
 
     /// Creates PxSerialObjectId values for unnamed objects in a collection.
@@ -13708,6 +13633,8 @@ extern "C" {
     /// Serialization of objects in a scene that is simultaneously being simulated is not supported and leads to undefined behavior.
     ///
     /// Whether serialization was successful
+    ///
+    /// exportNames = false
     pub fn PxSerialization_serializeCollectionToBinary(outputStream: *mut PxOutputStream, collection: *mut PxCollection, sr: *mut PxSerializationRegistry, externalRefs: *const PxCollection, exportNames: bool) -> bool;
 
     /// Creates an application managed registry for serialization.
@@ -13740,17 +13667,6 @@ extern "C" {
     /// eYIELD_THREAD and eYIELD_PROCESSOR modes will use compute resources even if the simulation is not running.
     /// It is left to users to keep threads inactive, if so desired, when no simulation is running.
     pub fn phys_PxDefaultCpuDispatcherCreate(numThreads: u32, affinityMasks: *mut u32, mode: PxDefaultCpuDispatcherWaitForWorkMode, yieldProcessorCount: u32) -> *mut PxDefaultCpuDispatcher;
-
-    /// Builds smooth vertex normals over a mesh.
-    ///
-    /// - "smooth" because smoothing groups are not supported here
-    /// - takes angles into account for correct cube normals computation
-    ///
-    /// To use 32bit indices pass a pointer in dFaces and set wFaces to zero. Alternatively pass a pointer to
-    /// wFaces and set dFaces to zero.
-    ///
-    /// True on success.
-    pub fn phys_PxBuildSmoothNormals(nbTris: u32, nbVerts: u32, verts: *const PxVec3, dFaces: *const u32, wFaces: *const u16, normals: *mut PxVec3, flip: bool) -> bool;
 
     /// simple method to create a PxRigidDynamic actor with a single PxShape.
     ///
@@ -13877,6 +13793,8 @@ extern "C" {
     /// The geometry and relative positions of the actor are multiplied by the given scale value. If the actor is a rigid body or an
     /// articulation link and the scaleMassProps value is true, the mass properties are scaled assuming the density is constant: the
     /// center of mass is linearly scaled, the mass is multiplied by the cube of the scale, and the inertia tensor by the fifth power of the scale.
+    ///
+    /// scaleMassProps = true
     pub fn phys_PxScaleRigidActor(actor: *mut PxRigidActor, scale: f32, scaleMassProps: bool);
 
     pub fn PxStringTableExt_createStringTable(inAllocator: *mut PxAllocatorCallback) -> *mut PxStringTable;
@@ -13929,6 +13847,8 @@ extern "C" {
     /// If a shape from the scene is already overlapping with the query shape in its starting position, behavior is controlled by the PxSceneQueryFlag::eINITIAL_OVERLAP flag.
     ///
     /// True if a blocking hit was found.
+    ///
+    /// inflation = 0
     pub fn PxSceneQueryExt_sweepAny(scene: *const PxScene, geometry: *const PxGeometry, pose: *const PxTransform, unitDir: *const PxVec3, distance: f32, queryFlags: PxHitFlags, hit: *mut PxQueryHit, filterData: *const PxQueryFilterData, filterCall: *mut PxQueryFilterCallback, cache: *const PxQueryCache, inflation: f32) -> bool;
 
     /// Sweep returning a single result.
@@ -13938,6 +13858,8 @@ extern "C" {
     /// If a shape from the scene is already overlapping with the query shape in its starting position, behavior is controlled by the PxSceneQueryFlag::eINITIAL_OVERLAP flag.
     ///
     /// True if a blocking hit was found.
+    ///
+    /// inflation = 0
     pub fn PxSceneQueryExt_sweepSingle(scene: *const PxScene, geometry: *const PxGeometry, pose: *const PxTransform, unitDir: *const PxVec3, distance: f32, outputFlags: PxHitFlags, hit: *mut PxSweepHit, filterData: *const PxQueryFilterData, filterCall: *mut PxQueryFilterCallback, cache: *const PxQueryCache, inflation: f32) -> bool;
 
     /// Sweep returning multiple results.
@@ -13949,6 +13871,8 @@ extern "C" {
     /// If a shape from the scene is already overlapping with the query shape in its starting position, behavior is controlled by the PxSceneQueryFlag::eINITIAL_OVERLAP flag.
     ///
     /// Number of hits in the buffer, or -1 if the buffer overflowed.
+    ///
+    /// inflation = 0
     pub fn PxSceneQueryExt_sweepMultiple(scene: *const PxScene, geometry: *const PxGeometry, pose: *const PxTransform, unitDir: *const PxVec3, distance: f32, outputFlags: PxHitFlags, hitBuffer: *mut PxSweepHit, hitBufferSize: u32, blockingHit: *mut bool, filterData: *const PxQueryFilterData, filterCall: *mut PxQueryFilterCallback, cache: *const PxQueryCache, inflation: f32) -> i32;
 
     /// Test overlap between a geometry and objects in the scene.
@@ -13996,6 +13920,8 @@ extern "C" {
     ///
     /// Returns a PxSweepBuffer pointer that will store the result of the query after execute() is completed.
     /// This will point either to an element of the buffer allocated on construction or to a user buffer passed to the constructor.
+    ///
+    /// inflation = 0
     pub fn PxBatchQueryExt_sweep_mut(self_: *mut PxBatchQueryExt, geometry: *const PxGeometry, pose: *const PxTransform, unitDir: *const PxVec3, distance: f32, maxNbTouches: u16, hitFlags: PxHitFlags, filterData: *const PxQueryFilterData, cache: *const PxQueryCache, inflation: f32) -> *mut PxSweepBuffer;
 
     /// Performs an overlap test of a given geometry against objects in the scene.
@@ -14109,6 +14035,8 @@ extern "C" {
     /// It can be plugged to PxScene the same way, via PxSceneDesc::sceneQuerySystem.
     ///
     /// A custom SQ system instance
+    ///
+    /// usesTreeOfPruners = false
     pub fn phys_PxCreateCustomSceneQuerySystem(sceneQueryUpdateMode: PxSceneQueryUpdateMode, contextID: u64, adapter: *const PxCustomSceneQuerySystemAdapter, usesTreeOfPruners: bool) -> *mut PxCustomSceneQuerySystem;
 
     /// Computes closest polygon of the convex hull geometry for a given impact point
@@ -14126,9 +14054,13 @@ extern "C" {
     pub fn PxPoissonSampler_setSamplingRadius_mut(self_: *mut PxPoissonSampler, samplingRadius: f32) -> bool;
 
     /// Adds new Poisson Samples inside the sphere specified
+    ///
+    /// createVolumeSamples = false
     pub fn PxPoissonSampler_addSamplesInSphere_mut(self_: *mut PxPoissonSampler, sphereCenter: *const PxVec3, sphereRadius: f32, createVolumeSamples: bool);
 
     /// Adds new Poisson Samples inside the box specified
+    ///
+    /// createVolumeSamples = false
     pub fn PxPoissonSampler_addSamplesInBox_mut(self_: *mut PxPoissonSampler, axisAlignedBox: *const PxBounds3, boxOrientation: *const PxQuat, createVolumeSamples: bool);
 
     pub fn PxPoissonSampler_delete(self_: *mut PxPoissonSampler);
@@ -14136,6 +14068,8 @@ extern "C" {
     /// Creates a shape sampler
     ///
     /// Returns the sampler
+    ///
+    /// numSampleAttemptsAroundPoint = 30
     pub fn phys_PxCreateShapeSampler(geometry: *const PxGeometry, transform: *const PxTransform, worldBounds: *const PxBounds3, initialSamplingRadius: f32, numSampleAttemptsAroundPoint: i32) -> *mut PxPoissonSampler;
 
     /// Checks whether a point is inside the triangle mesh
@@ -14148,31 +14082,21 @@ extern "C" {
     /// Creates a triangle mesh sampler
     ///
     /// Returns the sampler
+    ///
+    /// numSampleAttemptsAroundPoint = 30
     pub fn phys_PxCreateTriangleMeshSampler(triangles: *const u32, numTriangles: u32, vertices: *const PxVec3, numVertices: u32, initialSamplingRadius: f32, numSampleAttemptsAroundPoint: i32) -> *mut PxTriangleMeshPoissonSampler;
 
     /// Returns the index of the tetrahedron that contains a point
     ///
     /// The index of the tetrahedon containing the point, -1 if not tetrahedron contains the opoint
+    ///
+    /// tolerance = 9.99999997E-7
     pub fn PxTetrahedronMeshExt_findTetrahedronContainingPoint(mesh: *const PxTetrahedronMesh, point: *const PxVec3, bary: *mut PxVec4, tolerance: f32) -> i32;
 
     /// Returns the index of the tetrahedron closest to a point
     ///
     /// The index of the tetrahedon closest to the point
     pub fn PxTetrahedronMeshExt_findTetrahedronClosestToPoint(mesh: *const PxTetrahedronMesh, point: *const PxVec3, bary: *mut PxVec4) -> i32;
-
-    /// Initialize the PhysXExtensions library.
-    ///
-    /// This should be called before calling any functions or methods in extensions which may require allocation.
-    ///
-    /// This function does not need to be called before creating a PxDefaultAllocator object.
-    pub fn phys_PxInitExtensions(physics: *mut PxPhysics, pvd: *mut PxPvd) -> bool;
-
-    /// Shut down the PhysXExtensions library.
-    ///
-    /// This function should be called to cleanly shut down the PhysXExtensions library before application exit.
-    ///
-    /// This function is required to be called to release foundation usage.
-    pub fn phys_PxCloseExtensions();
 
     pub fn PxRepXObject_new(inTypeName: *const std::ffi::c_char, inSerializable: *const std::ffi::c_void, inId: u64) -> PxRepXObject;
 
@@ -14199,6 +14123,8 @@ extern "C" {
     pub fn PxPvd_disconnect_mut(self_: *mut PxPvd);
 
     /// Return if connection to PVD is created.
+    ///
+    /// useCachedStatus = true
     pub fn PxPvd_isConnected_mut(self_: *mut PxPvd, useCachedStatus: bool) -> bool;
 
     /// returns the PVD data transport
