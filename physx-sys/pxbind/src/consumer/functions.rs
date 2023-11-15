@@ -196,6 +196,7 @@ impl<'ast> super::AstConsumer<'ast> {
                             }
                             Item::StringLiteral { value, kind: _ } => Some(value),
                             Item::UserDefinedLiteral { value, kind: _ } => Some(value),
+                            Item::ConstantExpr { value, kind: _ } => value.as_deref(),
                             Item::CXXBoolLiteralExpr { value, kind: _ } => {
                                 Some(if *value { "true" } else { "false" })
                             }
