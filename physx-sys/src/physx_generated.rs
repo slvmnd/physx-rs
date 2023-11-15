@@ -4824,7 +4824,7 @@ extern "C" {
     pub fn Interpolation_PxSDFSampleImpl(sdf: *const f32, localPos: *const PxVec3, sdfBoxLower: *const PxVec3, sdfBoxHigher: *const PxVec3, sdfDx: f32, invSdfDx: f32, dimX: u32, dimY: u32, dimZ: u32, tolerance: f32) -> f32;
 
     ///
-    /// tolerance = 3.40282347E+38
+    /// tolerance = 340282350000000000000000000000000000000
     pub fn phys_PxSdfSample(sdf: *const f32, localPos: *const PxVec3, sdfBoxLower: *const PxVec3, sdfBoxHigher: *const PxVec3, sdfDx: f32, invSdfDx: f32, dimX: u32, dimY: u32, dimZ: u32, gradient: *mut PxVec3, tolerance: f32) -> f32;
 
     /// The constructor for Mutex creates a mutex. It is initially unlocked.
@@ -14090,7 +14090,7 @@ extern "C" {
     ///
     /// The index of the tetrahedon containing the point, -1 if not tetrahedron contains the opoint
     ///
-    /// tolerance = 9.99999997E-7
+    /// tolerance = 0.000001
     pub fn PxTetrahedronMeshExt_findTetrahedronContainingPoint(mesh: *const PxTetrahedronMesh, point: *const PxVec3, bary: *mut PxVec4, tolerance: f32) -> i32;
 
     /// Returns the index of the tetrahedron closest to a point
